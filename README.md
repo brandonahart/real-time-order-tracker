@@ -13,7 +13,6 @@ A full-stack application to create, update, and track food orders in real time u
 - Real-time UI updates through GraphQL Subscriptions
 - Kafka-integrated backend: events are published and consumed
 - Clean separation between business logic and streaming
-- No Docker required — local development ready
 
 ## WorkFlow
 1. React sends a GraphQL mutation (createOrder)
