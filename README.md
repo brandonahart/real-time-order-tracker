@@ -28,3 +28,11 @@ bin/kafka-server-start.sh config/server.properties
 3. Create Topics
 bin/kafka-topics.sh --create --topic order.created --bootstrap-server localhost:9092
 bin/kafka-topics.sh --create --topic order.status.updated --bootstrap-server localhost:9092
+
+## Backend and Frontend run
+1. git clone https://github.com/your-username/order-tracker.git
+2. cd order-tracker/OrderService
+3. dotnet run
+4. cd ../order-tracker-client
+5. npm install
+6. npm start
