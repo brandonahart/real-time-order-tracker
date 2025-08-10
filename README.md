@@ -26,7 +26,7 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 2. Start Kafka Server
 bin/kafka-server-start.sh config/server.properties
 3. Create Topics
-bin/kafka-topics.sh --create --topic order.created --bootstrap-server localhost:9092
+bin/kafka-topics.sh --create --topic order.created --bootstrap-server localhost:9092 \n
 bin/kafka-topics.sh --create --topic order.status.updated --bootstrap-server localhost:9092
 
 ## Backend and Frontend run
