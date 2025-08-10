@@ -21,11 +21,11 @@ A full-stack application to create, update, and track food orders in real time u
 4. Apollo Client (React) receives the update over WebSocket and re-renders the UI
 
 ## Kafka Setup (Within your kafka directory)
-1. Start Zookeeper
+1. Start Zookeeper <br>
 bin/zookeeper-server-start.sh config/zookeeper.properties
-2. Start Kafka Server
-bin/kafka-server-start.sh config/server.properties
-3. Create Topics
+2. Start Kafka Server <br>
+bin/kafka-server-start.sh config/server.properties 
+3. Create Topics<br>
 bin/kafka-topics.sh --create --topic order.created --bootstrap-server localhost:9092 <br>
 bin/kafka-topics.sh --create --topic order.status.updated --bootstrap-server localhost:9092
 
