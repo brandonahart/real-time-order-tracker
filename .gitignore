@@ -1,0 +1,10 @@
+# Node / React
+order-tracker-client/node_modules/
+order-tracker-client/npm-debug.log
+order-tracker-client/package-lock.json
+
+#.NET
+./OrderService/appsettings.json
+OrderService/appsettings.Development.json
+OrderService/bin/
+OrderService/obj/

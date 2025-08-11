@@ -1,22 +1,30 @@
+using Microsoft.EntityFrameworkCore;
 using OrderService.Models;
 
 namespace OrderService.Services {
     public class OrderService {
-        private readonly List<Order> _orders = new();
+        private readonly AppDbContext _db;
+        public OrderService(AppDbContext db) { _db = db; }
 
-        public Order CreateOrder(string customerName, string item) {
+        public async Task<Order> CreateOrder(string customerName, string item)
+        {
             var order = new Order { CustomerName = customerName, Item = item };
-            _orders.Add(order);
+            _db.Orders.Add(order);
+            await _db.SaveChangesAsync();
             return order;
         }
 
-        public IEnumerable<Order> GetAllOrders() => _orders;
+        public IEnumerable<Order> GetAllOrders() => _db.Orders.ToList();
 
-        public Order GetOrderById(Guid id) => _orders.FirstOrDefault(o => o.Id == id);
+        public Task<Order?> GetOrderById(Guid id)
+        {
+            return _db.Orders.FirstOrDefaultAsync(o => o.Id == id);
+        }
 
-        public Order UpdateStatus(Guid id, string status) {
-            var order = GetOrderById(id);
+        public async Task<Order?> UpdateStatus(Guid id, string status) {
+            var order = await GetOrderById(id);
             if (order != null) order.Status = status;
+            _db.SaveChanges();
             return order;
         }
     }

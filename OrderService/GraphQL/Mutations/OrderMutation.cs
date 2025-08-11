@@ -5,26 +5,26 @@ using System.Text.Json;
 
 namespace OrderService.GraphQL.Mutations {
     public class OrderMutation {
-        public Order CreateOrder(
+        public async Task<Order> CreateOrder(
             string customerName,
             string item,
             [Service] OrderService.Services.OrderService service,
             [Service] KafkaProducer producer) {
 
-            var order = service.CreateOrder(customerName, item);
+            var order = await service.CreateOrder(customerName, item);
             var message = JsonSerializer.Serialize(order);
             producer.Send("order.created", message);
             producer.Send("order.status.updated", message);
             return order;
         }
 
-        public Order UpdateOrderStatus(
+        public async Task<Order?> UpdateOrderStatus(
             Guid id,
             string status,
             [Service] OrderService.Services.OrderService service,
             [Service] KafkaProducer producer) {
 
-            var order = service.UpdateStatus(id, status);
+            var order = await service.UpdateStatus(id, status);
             if (order != null) {
                 var message = JsonSerializer.Serialize(order);
                 producer.Send("order.status.updated", message);

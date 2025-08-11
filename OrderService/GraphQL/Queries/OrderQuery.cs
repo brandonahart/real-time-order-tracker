@@ -3,8 +3,11 @@ using OrderService.Services;
 
 namespace OrderService.GraphQL.Queries {
     public class OrderQuery {
-        public IEnumerable<Order> GetOrders([Service] OrderService.Services.OrderService service) => service.GetAllOrders();
+        public Task<IEnumerable<Order>> GetOrders([Service] Services.OrderService service)
+        {
+            return Task.FromResult(service.GetAllOrders());
+        }
 
-        public Order GetOrderById(Guid id, [Service] OrderService.Services.OrderService service) => service.GetOrderById(id);
+        public Task<Order?> GetOrderById(Guid id, [Service] Services.OrderService service) => service.GetOrderById(id);
     }
 }

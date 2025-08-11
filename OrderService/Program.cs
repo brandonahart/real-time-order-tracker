@@ -7,6 +7,7 @@ using OrderService.GraphQL.Subscriptions;
 using OrderService.Services;
 using OrderService.Models;
 using OrderService.Kafka;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,10 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
-builder.Services.AddSingleton<OrderService.Services.OrderService>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<OrderService.Services.OrderService>();
 builder.Services.AddSingleton<KafkaProducer>();
 builder.Services.AddSingleton<KafkaConsumer>();
 builder.Services.AddHostedService(provider => provider.GetRequiredService<KafkaConsumer>());

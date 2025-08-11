@@ -30,11 +30,13 @@ export default function PlaceOrder() {
     const [updateOrderStatus, { loading: updating, error: updateError }] = useMutation(UPDATE_ORDER_STATUS);
 
     const handleSubmit = async (event) => {
+
         event.preventDefault();
         try {
             const { data } = await createOrder({
                 variables: { customerName, item }
             });
+            alert(`Order placed! ID: ${data.createOrder.id}`);
             setCustomerName('');
             setItem('');
         } catch (err) {
