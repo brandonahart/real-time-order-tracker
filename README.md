@@ -39,3 +39,11 @@ bin/kafka-topics.sh --create --topic order.status.updated --bootstrap-server loc
 4. cd ../order-tracker-client
 5. npm install
 6. npm start
+
+## Screenshots of the application order list screen and add order screen
+Yes I know the UI isnt great but I like to put my time towards learning the functionality than how my application looks
+### Order List View
+![Order list showing live updates](assets/ScreenshotOfOrderList.png)
+
+### Create Order Form
+![Form to create a new order](assets/ScreenshotOfAddOrder.png)
